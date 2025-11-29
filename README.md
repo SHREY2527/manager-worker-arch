@@ -24,9 +24,9 @@ The `Worker` class represents a worker thread. It:
 
 ### 3. Database Operations (`database.py`)
 The `DBOperations` class abstracts the data access layer. It provides methods to:
-- `get_job_for_worker()`: Fetch unprocessed jobs.
-- `submit_job_result()`: Save successful job results.
-- `submit_job_for_failure()`: Handle and log failed jobs.
+- `getJobForWorker()`: Fetch unprocessed jobs.
+- `submitJobResult()`: Save successful job results.
+- `submitJobForFailure()`: Handle and log failed jobs.
 
 ### 4. Thread Wrapper (`Thread.py`)
 A custom wrapper around Python's `threading.Thread` class. It provides enhanced control over thread execution, including:
