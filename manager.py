@@ -6,13 +6,13 @@ import time
 
 class Manager():
     def __init__(self):
-        self.database_obj = DBOperations() #here we will initialize data source it is either databse,or any api or anything else
-        self.manager_lock = threading.Lock() #lock for thread safty
-        Worker_detail_dict = {"worker_name": 1} #you can add multiple workers and also directly manage total number of worker from here
+        self.database_obj = DBOperations() # Initialize the data source (Database, API, etc.)
+        self.manager_lock = threading.Lock() # Lock for thread safety
+        Worker_detail_dict = {"worker_name": 1} # Define worker types and their counts here
         self.workers = [] 
         for worker_name, total_workers in Worker_detail_dict.items():
             for i in range(total_workers):
-                # Pass self (manager) to worker
+                # Initialize the worker with a reference to the manager
                 worker_thread = Worker(self, worker_name)
                 worker_thread.start()
                 self.workers.append(worker_thread)
@@ -24,7 +24,7 @@ class Manager():
         if worker_name == "worker_name":
             self.manager_lock.acquire()
             try:
-                # get the job from databse
+                # Retrieve a job from the database
                 result = self.database_obj.get_job_for_worker()
             finally:
                 self.manager_lock.release()
@@ -43,10 +43,10 @@ class Manager():
             self.manager_lock.acquire()
             try:             
                 if generated_response:
-                    # update the job in database
+                    # Update the job success status in the database
                     self.database_obj.submit_job_result(generated_response)
                 else:
-                    # update the job in database
+                    # Update the job failure status in the database
                     self.database_obj.submit_job_for_failure(generated_response)
             finally:
                 self.manager_lock.release()
