@@ -2,7 +2,7 @@ class DBOperations():
     def __init__(self):
         pass
 
-    def get_job_for_worker(self):
+    def getJobForWorker(self):
         """
         Retrieves an unprocessed job from the database.
         Implement the logic to fetch the next available job.
@@ -11,14 +11,14 @@ class DBOperations():
         """
         pass
 
-    def submit_job_result(self, generated_response):
+    def submitJobResult(self, generated_response):
         """
         Updates the job result in the database upon successful completion.
         Implement the logic to save the generated response.
         """
         pass
     
-    def submit_job_for_failure(self):
+    def submitJobForFailure(self):
         """
         Updates the job status in the database upon failure.
         Implement the logic to handle job failure (e.g., retry count, error logging).

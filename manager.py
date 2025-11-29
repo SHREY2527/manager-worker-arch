@@ -1,6 +1,5 @@
 from worker import Worker
 from database import DBOperations
-import uuid
 import threading
 import time
 
@@ -25,7 +24,7 @@ class Manager():
             self.manager_lock.acquire()
             try:
                 # Retrieve a job from the database
-                result = self.database_obj.get_job_for_worker()
+                result = self.database_obj.getJobForWorker()
             finally:
                 self.manager_lock.release()
             
@@ -44,10 +43,10 @@ class Manager():
             try:             
                 if generated_response:
                     # Update the job success status in the database
-                    self.database_obj.submit_job_result(generated_response)
+                    self.database_obj.submitJobResult(generated_response)
                 else:
                     # Update the job failure status in the database
-                    self.database_obj.submit_job_for_failure(generated_response)
+                    self.database_obj.submitJobForFailure(generated_response)
             finally:
                 self.manager_lock.release()
         else:
